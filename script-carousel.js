@@ -73,4 +73,20 @@ tab.forEach((element) => {
 });
 
 const sd = document.querySelector(".slick-dots");
-console.log(sd)
+console.log(sd);
+sd.forEach((element) => {
+    element.addEventListener("click", (event) =>{
+        sd.forEach((item) => {
+            if (item != element) {
+              item.classList.remove("slick-active");
+            } else {
+              element.classList.add("slick-active");
+              let att = element.attributes[1].value;
+              slt.style =
+                "opacity: 1; width: 6320px; transform: translate3d( " +
+                -(att * 1264) +
+                "px, 0px, 0px);";
+            }
+          });
+    });
+});
