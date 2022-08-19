@@ -46,10 +46,10 @@ window.addEventListener(
 );
 
 window.addEventListener("resize", function (event) {
-    // slt.style =
-    //             "opacity: 1; width: "+(5 * width)+"px; transform: translate3d( " +
-    //             -(attr[0].attributes[1].value * width) +
-    //             "px, 0px, 0px);";
+    slt.style =
+                "opacity: 1; width: "+(5 * cw)+"px; transform: translate3d( " +
+                -(attr[0].attributes[1].value * cw) +
+                "px, 0px, 0px);";
   if (
     this.document.body.clientWidth > (40/100 * cw) &&
     this.document.body.clientWidth < (60/100 * cw)
