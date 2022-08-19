@@ -6267,7 +6267,10 @@ tbody.collapse.in {
   outline: 0;
   background-color: #d31145;
 }
-.slick-dots li.slick-active button {
+.slick-dots li.slick button{
+  background-color: #b3b1a8;
+}
+.slick-dots li.slick.active button {
   background-color: #d31145;
 }
 .slick-dots li + li {
