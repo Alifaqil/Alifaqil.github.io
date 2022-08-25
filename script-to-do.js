@@ -10,6 +10,7 @@ class toDo {
 
 const btn = document.querySelector("#add");
 btn.addEventListener("click", (event) => {
+  event.preventDefault();
   const dt = document.querySelector("#time").value;
   const st = document.querySelector("#status").value;
   const tt = document.querySelector("#title").value;
@@ -23,11 +24,14 @@ btn.addEventListener("click", (event) => {
   });
   if (dt == "") {
     alert("Please Fill the Date and Time");
+    return false;
   } else if (tt == "") {
     alert("Please Fill the Title");
+    return false;
   } else {
     const list = new toDo(dt, st, tt, desc);
     const jsonobj = JSON.stringify(list);
     localStorage.setItem(id, jsonobj);
+    document.querySelector("#ftd").reset();
   }
 });
