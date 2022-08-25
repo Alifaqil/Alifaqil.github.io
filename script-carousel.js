@@ -14,6 +14,9 @@ slt.style =
                 -(attr[0].attributes[1].value * cw) +
                 "px, 0px, 0px);";
 
+ cd.forEach((element) => {
+    element.style = "border-top-color: rgb(166, 232, 222); height: "+(25/100 * cw)+"px;";
+    });
 var lastScrollTop = 0;
 window.addEventListener(
   "scroll",
@@ -60,13 +63,13 @@ window.addEventListener("resize", function (event) {
   } else if (this.document.body.clientWidth < (90/100 * cw)) {
     cd.forEach((element) => {
       element.style =
-        "border-top-color: rgb(166, 232, 222); height: 307.521px;";
+        "border-top-color: rgb(166, 232, 222); height: "+(25/100 * cw)+"px;";
     });
     document.getElementById("sticky").style = "top: 60px";
   } else {
     cd.forEach((element) => {
       element.style =
-        "border-top-color: rgb(166, 232, 222); height: 307.521px;";
+        "border-top-color: rgb(166, 232, 222); height: "+(25/100 * cw)+"px;";
     });
     document.getElementById("sticky").style = "top: 88px";
   }
@@ -100,3 +103,5 @@ function carousel(array, array2, e){
 
 carousel(tab, sd, "mouseover");
 carousel(sd, tab, "click");
+
+

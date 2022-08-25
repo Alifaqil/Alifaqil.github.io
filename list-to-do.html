@@ -1,0 +1,1380 @@
+!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="img\favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="mainaia.css" type="text/css" />
+    <title>List To-Do</title>
+    <script defer src="script-list.js"></script>
+    <style>
+      h1 {
+        margin: 0 20px;
+        font-weight: 400;
+        color: #d31145;
+      }
+      #tasks {
+        border-radius: 10px;
+        width: 100%;
+        position: relative;
+        background-color: #ffffff;
+        padding: 30px 20px;
+        margin-top: 10px;
+      }
+
+      .task {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        width: 100%;
+        margin-bottom: 8px;
+        padding: 5px 10px;
+        height: relative;
+        overflow: hidden;
+        border-radius: 12px;
+      }
+      h6 {
+        display: inline-block;
+        align-items: center;
+      }
+      p {
+        margin: 5px 0;
+      }
+      .delete {
+        border-radius: 12px;
+        float: right;
+        background-color: #4caf50;
+        border: none;
+        color: #ffffff;
+        font-size: 16px;
+        padding: 8px 18px;
+        border: 2px solid #4caf50;
+      }
+      .delete:hover {
+        background: #fff;
+        color: #4caf50;
+        border: 2px solid #4caf50;
+      }
+      .status {
+        border-radius: 12px;
+        border: none;
+        background-color: #d31145;
+        color: #ffffff;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <div class="topnav global-nav parbase">
+        <div class="navmenu-backdrop"></div>
+        <div class="navmenu navmenu-default navmenu-fixed-left offcanvas">
+          <ul
+            class="nav navmenu-nav navmenu-search-button border-bottom-dark border-top-dark"
+          >
+            <li>
+              <a href="/en/search.html" class="clearfix">
+                <svg
+                  class="icon-xs hide-on-fallback"
+                  role="img"
+                  title="icon-search-nav"
+                >
+                  <use
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    data-savepage-href="/content/dam/aia/icons/icons.svg#search-nav"
+                    href="#search-nav"
+                  ></use>
+                  <!--savepage-symbol-insert-->
+                  <symbol id="search-nav" viewBox="0 0 64 64">
+                    <path
+                      fill="#fff"
+                      d="M28.907 47.12c-10.053 0-18.24-8.16-18.24-18.213s8.187-18.24 18.24-18.24 18.24 8.187 18.24 18.24S38.96 47.12 28.907 47.12zm0-31.067c-7.093 0-12.853 5.76-12.853 12.853s5.76 12.853 12.853 12.853 12.853-5.76 12.853-12.853-5.787-12.853-12.853-12.853zM43.587 38.075l9.749 9.749L48 53.16l-9.749-9.749 5.336-5.336z"
+                    ></path>
+                  </symbol>
+                  <image
+                    class="icon icon-xs"
+                    src="/content/dam/aia/icons/navigation/search-nav.png"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xlink:href=""
+                  ></image>
+                </svg>
+                <span class="h5 w">Search</span>
+              </a>
+            </li>
+          </ul>
+
+          <ul class="nav navmenu-nav" data-user-menu="individual">
+            <li>
+              <a class="clearfix" href="/en/index.html">
+                <svg
+                  class="icon-xs hide-on-fallback"
+                  role="img"
+                  title="icon-search-nav"
+                >
+                  <use
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    data-savepage-href="/content/dam/aia/icons/icons.svg#search-nav"
+                    href="#search-nav"
+                  ></use>
+                  <!--savepage-symbol-insert-->
+                  <symbol id="search-nav" viewBox="0 0 64 64">
+                    <path
+                      fill="#fff"
+                      d="M28.907 47.12c-10.053 0-18.24-8.16-18.24-18.213s8.187-18.24 18.24-18.24 18.24 8.187 18.24 18.24S38.96 47.12 28.907 47.12zm0-31.067c-7.093 0-12.853 5.76-12.853 12.853s5.76 12.853 12.853 12.853 12.853-5.76 12.853-12.853-5.787-12.853-12.853-12.853zM43.587 38.075l9.749 9.749L48 53.16l-9.749-9.749 5.336-5.336z"
+                    ></path>
+                  </symbol>
+                  <image
+                    class="icon icon-xs"
+                    src="/content/dam/aia/icons/navigation/search-nav.png"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xlink:href=""
+                  ></image>
+                </svg>
+
+                <span class="h5 w">AIA Singapore</span>
+              </a>
+            </li>
+
+            <li class="dropdown">
+              <div class="mobile-firstlevel">
+                <a class="" href="/en/our-products.html">
+                  <svg class="icon icon-xs hide-on-fallback" role="img">
+                    <g>
+                      <use
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        data-savepage-href="/content/dam/aia/icons/icons.svg#life-menu"
+                        href="#life-menu"
+                      ></use>
+                      <!--savepage-symbol-insert-->
+                      <symbol id="life-menu" viewBox="0 0 64 64">
+                        <path
+                          fill="#FFF"
+                          d="M9.547 11.547V32.88c0 14.293 21.333 21.333 21.333 21.333s21.333-6.747 21.333-21.333V11.547H9.546z"
+                        ></path>
+                        <path
+                          fill="#5D5D5D"
+                          d="M36.263 22.213l2.659 2.659-16.009 16.009-2.659-2.659 16.009-16.009z"
+                        ></path>
+                        <path
+                          fill="#B3B1A8"
+                          d="M43.04 29.493a5.5 5.5 0 0 0-.187-1.013c-1.067-4.56-2.107-5.733-4.587-7.52a16.015 16.015 0 0 0-3.387-1.973c-.453-.187-.72-.293-.72-.293-1.067-.4-2.187-.64-3.387-.773-4.107-.373-7.6.933-10.56 3.813l.053.027 19.12 19.12c3.04-3.013 4.32-7.28 3.653-11.387z"
+                        ></path>
+                      </symbol>
+                      <image
+                        class="icon icon-xs"
+                        src="/content/dam/aia/icons/menu/life-menu.png"
+                        alt="undefined"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xlink:href=""
+                      ></image>
+                    </g>
+                  </svg>
+
+                  <span>Our Products</span>
+                </a>
+                <a class="dropdown-toggle pull-right" data-toggle="dropdown">
+                  <svg
+                    class="icon icon-xs hide-on-fallback pull-right closed-show"
+                    role="img"
+                  >
+                    <g>
+                      <use
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        data-savepage-href="/content/dam/aia/icons/icons.svg#open-2ndg"
+                        href="#open-2ndg"
+                      ></use>
+                      <!--savepage-symbol-insert-->
+                      <symbol id="open-2ndg" viewBox="0 0 64 64">
+                        <path
+                          fill="#b3b1a8"
+                          d="M32 36.667L14.72 19.334l-4.053 4L32 44.667l21.333-21.333-4.053-4z"
+                        ></path>
+                      </symbol>
+                      <image
+                        class="icon icon-xs pull-right closed-show"
+                        src="/content/dam/aia/icons/secondary/open-2ndg.png"
+                        alt="undefined"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xlink:href=""
+                      ></image>
+                    </g>
+                  </svg>
+
+                  <svg
+                    class="icon icon-xs hide-on-fallback pull-right closed-hide"
+                    role="img"
+                  >
+                    <g>
+                      <use
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        data-savepage-href="/content/dam/aia/icons/icons.svg#close-2ndg"
+                        href="#close-2ndg"
+                      ></use>
+                      <!--savepage-symbol-insert-->
+                      <symbol id="close-2ndg" viewBox="0 0 64 64">
+                        <path
+                          fill="#b3b1a8"
+                          d="M32 27.333l17.28 17.333 4.053-4L32 19.333 10.667 40.666l4.053 4z"
+                        ></path>
+                      </symbol>
+                      <image
+                        class="icon icon-xs pull-right closed-hide"
+                        src="/content/dam/aia/icons/secondary/close-2ndg.png"
+                        alt="undefined"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xlink:href=""
+                      ></image>
+                    </g>
+                  </svg>
+                </a>
+              </div>
+              <ul
+                class="dropdown-menu navmenu-nav navmenu-dropdown-menu"
+                role="menu"
+              >
+                <li>
+                  <a class="h6 b5" href="/en/our-products/life-protection.html"
+                    >Life Insurance</a
+                  >
+                </li>
+
+                <li>
+                  <a
+                    class="h6 b5"
+                    href="/en/our-products/medical-protection.html"
+                    >Medical Insurance</a
+                  >
+                </li>
+
+                <li>
+                  <a
+                    class="h6 b5"
+                    href="/en/our-products/critical-illness-protection.html"
+                    >Critical Illness Insurance</a
+                  >
+                </li>
+
+                <li>
+                  <a
+                    class="h6 b5"
+                    href="/en/our-products/disability-income-protection.html"
+                    >Disability Income Protection</a
+                  >
+                </li>
+
+                <li>
+                  <a
+                    class="h6 b5"
+                    href="/en/our-products/accident-protection.html"
+                    >Accident Protection</a
+                  >
+                </li>
+
+                <li>
+                  <a class="h6 b5" href="/en/our-products/savings.html"
+                    >Savings</a
+                  >
+                </li>
+
+                <li>
+                  <a class="h6 b5" href="/en/our-products/investments.html"
+                    >Investments</a
+                  >
+                </li>
+
+                <li>
+                  <a class="h6 b5" href="/en/our-products/platinum.html"
+                    >Platinum</a
+                  >
+                </li>
+
+                <li>
+                  <a class="h6 b5" href="/en/our-products/travel-lifestyle.html"
+                    >Travel &amp; Lifestyle</a
+                  >
+                </li>
+
+                <li>
+                  <a class="h6 b5" href="/en/our-products/aia-vitality.html"
+                    >AIA Vitality</a
+                  >
+                </li>
+
+                <li>
+                  <a
+                    class="h6 b5"
+                    href="/en/our-products/employee-benefits.html"
+                    >Employee Benefits</a
+                  >
+                </li>
+
+                <li>
+                  <a
+                    class="h6 b5"
+                    href="/en/our-products/corporate-international-medical.html"
+                    >Corporate International Medical</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <div class="mobile-firstlevel">
+                <a class="" href="/en/life-matters.html">
+                  <svg class="icon icon-xs hide-on-fallback" role="img">
+                    <g>
+                      <use
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        data-savepage-href="/content/dam/aia/icons/icons.svg#careers-menu"
+                        href="#careers-menu"
+                      ></use>
+                      <!--savepage-symbol-insert-->
+                      <symbol id="careers-menu" viewBox="0 0 64 64">
+                        <path
+                          fill="#b3b1a8"
+                          d="M53.1 51.7V37.4c0-5.3-4.4-9.8-9.8-9.8-5.3 0-9.8 4.4-9.8 9.8v14.2h19.6z"
+                        ></path>
+                        <path
+                          fill="#fff"
+                          d="M51 20c0 4.2-3.4 7.7-7.7 7.7s-7.7-3.4-7.7-7.7 3.4-7.7 7.7-7.7S51 15.8 51 20z"
+                        ></path>
+                        <path
+                          fill="#b3b1a8"
+                          d="M35.7 18.2H51c-.7-3.6-3.9-6.2-7.7-6.2s-6.9 2.8-7.6 6.2zM35.7 18.2h3.2v17.3h-3.2V18.2zM47.6 18.2h3.2v17.3h-3.2V18.2zM36.4 51.7v-11c0-6.9-5.7-12.8-12.8-12.8-6.9 0-12.8 5.7-12.8 12.8v11h25.6z"
+                        ></path>
+                        <path
+                          fill="#fff"
+                          d="M31.1 19.8c0 4.3-3.6 7.8-7.8 7.8s-7.8-3.6-7.8-7.8S19 12 23.2 12s7.9 3.6 7.9 7.8z"
+                        ></path>
+                        <path
+                          fill="#b3b1a8"
+                          d="M25.5 15.2s-2.5 3.2-10 3.2c0 0 1.1-6.4 7.7-6.4 0 0 5.7-.7 7.8 6.4-.1 0-3.7 0-5.5-3.2z"
+                        ></path>
+                        <path
+                          fill="#fff"
+                          d="M25.2 33.9H22l-.4-2.7h4.1l-.5 2.7zM25.2 35H22l-.9 10.9 2.5 2 2.3-2-.7-10.9zM10.6 39h5.2v12.6h-5.2V39zM31.1 39h5.2v12.6h-5.2V39zM48 39h5.2v12.6H48V39z"
+                        ></path>
+                      </symbol>
+                      <image
+                        class="icon icon-xs"
+                        src="/content/dam/aia/icons/menu/careers-menu.png"
+                        alt="undefined"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xlink:href=""
+                      ></image>
+                    </g>
+                  </svg>
+
+                  <span>Life Matters</span>
+                </a>
+                <a class="dropdown-toggle pull-right" data-toggle="dropdown">
+                  <svg
+                    class="icon icon-xs hide-on-fallback pull-right closed-show"
+                    role="img"
+                  >
+                    <g>
+                      <use
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        data-savepage-href="/content/dam/aia/icons/icons.svg#open-2ndg"
+                        href="#open-2ndg"
+                      ></use>
+                      <!--savepage-symbol-insert-->
+                      <symbol id="open-2ndg" viewBox="0 0 64 64">
+                        <path
+                          fill="#b3b1a8"
+                          d="M32 36.667L14.72 19.334l-4.053 4L32 44.667l21.333-21.333-4.053-4z"
+                        ></path>
+                      </symbol>
+                      <image
+                        class="icon icon-xs pull-right closed-show"
+                        src="/content/dam/aia/icons/secondary/open-2ndg.png"
+                        alt="undefined"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xlink:href=""
+                      ></image>
+                    </g>
+                  </svg>
+
+                  <svg
+                    class="icon icon-xs hide-on-fallback pull-right closed-hide"
+                    role="img"
+                  >
+                    <g>
+                      <use
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        data-savepage-href="/content/dam/aia/icons/icons.svg#close-2ndg"
+                        href="#close-2ndg"
+                      ></use>
+                      <!--savepage-symbol-insert-->
+                      <symbol id="close-2ndg" viewBox="0 0 64 64">
+                        <path
+                          fill="#b3b1a8"
+                          d="M32 27.333l17.28 17.333 4.053-4L32 19.333 10.667 40.666l4.053 4z"
+                        ></path>
+                      </symbol>
+                      <image
+                        class="icon icon-xs pull-right closed-hide"
+                        src="/content/dam/aia/icons/secondary/close-2ndg.png"
+                        alt="undefined"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xlink:href=""
+                      ></image>
+                    </g>
+                  </svg>
+                </a>
+              </div>
+              <ul
+                class="dropdown-menu navmenu-nav navmenu-dropdown-menu"
+                role="menu"
+              >
+                <li>
+                  <a class="h6 b5" href="/en/life-matters/health.html"
+                    >Health Matters</a
+                  >
+                </li>
+
+                <li>
+                  <a class="h6 b5" href="/en/life-matters/wellness.html"
+                    >Wellness Matters</a
+                  >
+                </li>
+
+                <li>
+                  <a class="h6 b5" href="/en/life-matters/money.html"
+                    >Money Matters</a
+                  >
+                </li>
+
+                <li>
+                  <a
+                    class="h6 b5"
+                    href="/en/life-matters/wealth-management.html"
+                    >Wealth Matters</a
+                  >
+                </li>
+
+                <li>
+                  <a class="h6 b5" href="/en/life-matters/financial-tools.html"
+                    >Your Financial Needs Matter</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <div class="mobile-firstlevel">
+                <a class="" href="about-aia.html">
+                  <svg class="icon icon-xs hide-on-fallback" role="img">
+                    <g>
+                      <use
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        data-savepage-href="/content/dam/aia/icons/icons.svg#aia-menu"
+                        href="#aia-menu"
+                      ></use>
+                      <!--savepage-symbol-insert-->
+                      <symbol id="aia-menu" viewBox="0 0 64 64">
+                        <path
+                          fill="#FFF"
+                          d="M32 10.667c-11.787 0-21.333 9.547-21.333 21.333 0 1.387.187 2.693.427 4l8.187-8.187 4.107 4.107 12.773-12.773 16.827 16.827.347-3.973c0-11.787-9.547-21.333-21.333-21.333zM11.413 37.627c-.133-.533-.213-1.067-.32-1.627l-.027.027c.08.56.213 1.067.347 1.6z"
+                        ></path>
+                        <path
+                          fill="#B3B1A8"
+                          d="M52.96 35.947L36.133 19.12 23.36 31.893l-4.107-4.107-8.213 8.213a20.764 20.764 0 0 0 2.16 6.053c.027.053.053.08.08.133.16.293.347.613.533.907.08.107.133.24.213.347l.64.96c.053.08.107.16.16.213.187.267.4.533.613.773.08.107.16.187.24.267.24.293.507.587.773.88.08.08.133.16.213.213l.72.72c.08.053.133.133.213.187.293.267.587.533.907.773.08.08.16.133.24.213.293.24.587.453.88.667.053.027.08.053.133.107.347.24.667.453 1.013.667.08.053.187.107.267.16.347.213.72.427 1.093.613.027.027.053.027.107.053.347.187.693.347 1.067.507.08.053.187.08.267.107.373.16.773.32 1.147.453.08.027.133.053.213.08.347.133.72.24 1.067.347l.24.08c.4.107.827.213 1.227.293.08.027.187.027.267.053.373.08.773.16 1.147.213.053 0 .107.027.16.027.427.053.853.107 1.307.133.107 0 .213.027.293.027.453.08.907.107 1.36.107.4 0 .827-.027 1.227-.027.107 0 .213-.027.32-.027.347-.027.667-.053.987-.107.08 0 .16-.027.24-.027.4-.053.8-.107 1.173-.187.08-.027.187-.027.267-.053.32-.053.64-.133.933-.213.107-.027.187-.053.293-.08l1.12-.32c.053-.027.08-.027.133-.053.32-.107.667-.24.987-.347.107-.027.187-.08.293-.107l.96-.4c.053-.027.08-.027.133-.053.347-.16.693-.347 1.013-.507.027-.027.08-.027.107-.053 5.547-3.067 9.573-8.427 10.773-14.827z"
+                        ></path>
+                      </symbol>
+                      <image
+                        class="icon icon-xs"
+                        src="/content/dam/aia/icons/menu/aia-menu.png"
+                        alt="undefined"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xlink:href=""
+                      ></image>
+                    </g>
+                  </svg>
+
+                  <span>About AIA</span>
+                </a>
+                <a class="dropdown-toggle pull-right" data-toggle="dropdown">
+                  <svg
+                    class="icon icon-xs hide-on-fallback pull-right closed-show"
+                    role="img"
+                  >
+                    <g>
+                      <use
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        data-savepage-href="/content/dam/aia/icons/icons.svg#open-2ndg"
+                        href="#open-2ndg"
+                      ></use>
+                      <!--savepage-symbol-insert-->
+                      <symbol id="open-2ndg" viewBox="0 0 64 64">
+                        <path
+                          fill="#b3b1a8"
+                          d="M32 36.667L14.72 19.334l-4.053 4L32 44.667l21.333-21.333-4.053-4z"
+                        ></path>
+                      </symbol>
+                      <image
+                        class="icon icon-xs pull-right closed-show"
+                        src="/content/dam/aia/icons/secondary/open-2ndg.png"
+                        alt="undefined"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xlink:href=""
+                      ></image>
+                    </g>
+                  </svg>
+
+                  <svg
+                    class="icon icon-xs hide-on-fallback pull-right closed-hide"
+                    role="img"
+                  >
+                    <g>
+                      <use
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        data-savepage-href="/content/dam/aia/icons/icons.svg#close-2ndg"
+                        href="#close-2ndg"
+                      ></use>
+                      <!--savepage-symbol-insert-->
+                      <symbol id="close-2ndg" viewBox="0 0 64 64">
+                        <path
+                          fill="#b3b1a8"
+                          d="M32 27.333l17.28 17.333 4.053-4L32 19.333 10.667 40.666l4.053 4z"
+                        ></path>
+                      </symbol>
+                      <image
+                        class="icon icon-xs pull-right closed-hide"
+                        src="/content/dam/aia/icons/secondary/close-2ndg.png"
+                        alt="undefined"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xlink:href=""
+                      ></image>
+                    </g>
+                  </svg>
+                </a>
+              </div>
+              <ul
+                class="dropdown-menu navmenu-nav navmenu-dropdown-menu"
+                role="menu"
+              >
+                <li>
+                  <a class="h6 b5" href="/en/about-aia/our-leadership-team.html"
+                    >Our Leadership Team</a
+                  >
+                </li>
+
+                <li>
+                  <a class="h6 b5" href="/en/about-aia/esg.html"
+                    >Environmental, Social and Governance</a
+                  >
+                </li>
+
+                <li>
+                  <a class="h6 b5" href="/en/about-aia/careers.html">Careers</a>
+                </li>
+
+                <li>
+                  <a class="h6 b5" href="/en/about-aia/media-centre.html"
+                    >Media Centre</a
+                  >
+                </li>
+
+                <li>
+                  <a class="h6 b5" href="/en/about-aia/our-awards.html"
+                    >Awards</a
+                  >
+                </li>
+
+                <li>
+                  <a class="h6 b5" href="/en/about-aia/our-top-awardees.html"
+                    >Our Top Awardees</a
+                  >
+                </li>
+
+                <li>
+                  <a class="h6 b5" href="/en/about-aia/mdrt-members.html"
+                    >MDRT Members</a
+                  >
+                </li>
+
+                <li>
+                  <a class="h6 b5" href="/en/about-aia/aiafa.html"
+                    >AIA Financial Advisers</a
+                  >
+                </li>
+
+                <li>
+                  <a class="h6 b5" href="/en/about-aia/aia-brunei.html"
+                    >AIA Brunei</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <div class="mobile-firstlevel">
+                <a class="" href="/en/aia-vitality.html">
+                  <svg class="icon icon-xs hide-on-fallback" role="img">
+                    <g>
+                      <use
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        data-savepage-href="/content/dam/aia/icons/icons.svg#vitality-menu"
+                        href="#vitality-menu"
+                      ></use>
+                      <!--savepage-symbol-insert-->
+                      <symbol id="vitality-menu" viewBox="0 0 64 64">
+                        <g fill="none">
+                          <path
+                            fill="#FFF"
+                            d="M58.666 32c0 14.727-11.939 26.666-26.666 26.666C17.272 58.666 5.333 46.727 5.333 32 5.333 17.272 17.273 5.333 32 5.333c14.727 0 26.666 11.94 26.666 26.667z"
+                          ></path>
+                          <path
+                            fill="#6F6E68"
+                            d="M45 14.722c-.854-1.03-11.723-2.405-21.117 30.33-.078.257-.388.171-.388 0-1.475-8.678-.854-18.559-1.01-20.105-.465-3.953-3.493-2.664-3.493-2.664-1.397 3.093-.466 28.44 1.786 31.704 1.32.601 5.201.43 6.055-.601 0-.086 5.435-32.048 18.167-38.664z"
+                          ></path>
+                        </g>
+                      </symbol>
+                      <image
+                        class="icon icon-xs"
+                        src="/content/dam/aia/icons/menu/vitality-menu.png"
+                        alt="undefined"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xlink:href=""
+                      ></image>
+                    </g>
+                  </svg>
+
+                  <span>AIA Vitality</span>
+                </a>
+                <a class="dropdown-toggle pull-right" data-toggle="dropdown">
+                  <svg
+                    class="icon icon-xs hide-on-fallback pull-right closed-show"
+                    role="img"
+                  >
+                    <g>
+                      <use
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        data-savepage-href="/content/dam/aia/icons/icons.svg#open-2ndg"
+                        href="#open-2ndg"
+                      ></use>
+                      <!--savepage-symbol-insert-->
+                      <symbol id="open-2ndg" viewBox="0 0 64 64">
+                        <path
+                          fill="#b3b1a8"
+                          d="M32 36.667L14.72 19.334l-4.053 4L32 44.667l21.333-21.333-4.053-4z"
+                        ></path>
+                      </symbol>
+                      <image
+                        class="icon icon-xs pull-right closed-show"
+                        src="/content/dam/aia/icons/secondary/open-2ndg.png"
+                        alt="undefined"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xlink:href=""
+                      ></image>
+                    </g>
+                  </svg>
+
+                  <svg
+                    class="icon icon-xs hide-on-fallback pull-right closed-hide"
+                    role="img"
+                  >
+                    <g>
+                      <use
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        data-savepage-href="/content/dam/aia/icons/icons.svg#close-2ndg"
+                        href="#close-2ndg"
+                      ></use>
+                      <!--savepage-symbol-insert-->
+                      <symbol id="close-2ndg" viewBox="0 0 64 64">
+                        <path
+                          fill="#b3b1a8"
+                          d="M32 27.333l17.28 17.333 4.053-4L32 19.333 10.667 40.666l4.053 4z"
+                        ></path>
+                      </symbol>
+                      <image
+                        class="icon icon-xs pull-right closed-hide"
+                        src="/content/dam/aia/icons/secondary/close-2ndg.png"
+                        alt="undefined"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xlink:href=""
+                      ></image>
+                    </g>
+                  </svg>
+                </a>
+              </div>
+              <ul
+                class="dropdown-menu navmenu-nav navmenu-dropdown-menu"
+                role="menu"
+              >
+                <li>
+                  <a
+                    class="h6 b5"
+                    href="/en/aia-vitality/about-aia-vitality.html"
+                    >About AIA Vitality</a
+                  >
+                </li>
+
+                <li>
+                  <a class="h6 b5" href="/en/aia-vitality/how-it-works.html"
+                    >How It Works</a
+                  >
+                </li>
+
+                <li>
+                  <a
+                    class="h6 b5"
+                    href="/en/aia-vitality/rewards-and-partner-benefits.html"
+                    >Rewards &amp; Partner Benefits</a
+                  >
+                </li>
+
+                <li>
+                  <a
+                    class="h6 b5"
+                    href="/en/aia-vitality/join-aia-vitality.html"
+                    >Join AIA Vitality</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <div class="mobile-firstlevel">
+                <a class="" href="/en/help-support.html">
+                  <svg class="icon icon-xs hide-on-fallback" role="img">
+                    <g>
+                      <use
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        data-savepage-href="/content/dam/aia/icons/icons.svg#agents-nav"
+                        href="#agents-nav"
+                      ></use>
+                      <!--savepage-symbol-insert-->
+                      <symbol id="agents-nav" viewBox="0 0 64 64">
+                        <path
+                          fill="#fff"
+                          d="M14.88 46.213c0-5.307 4.053-11.52 9.12-13.44-2.56-2.693-3.787-5.44-3.787-9.227 0-4.933 2.453-9.307 6.213-11.973-.133 0-.24-.027-.373-.027H25.04c-5.6 0-10.16 4.533-10.16 10.16v1.013c0 3.84 2.16 8.427 5.333 10.16-5.253 0-10.667 5.413-10.667 10.747v5.253h5.333v-2.667z"
+                        ></path>
+                        <path
+                          fill="#fff"
+                          d="M46.88 23.547c0 6.627-5.373 12-12 12s-12-5.373-12-12 5.373-12 12-12 12 5.373 12 12zM41.6 35.547H28.08c-5.147 0-10.533 5.52-10.533 10.667v8H30.88v-5.333l2.667-10.667h2.667l2.667 10.667v5.333h13.333v-8c0-5.147-5.44-10.667-10.613-10.667z"
+                        ></path>
+                      </symbol>
+                      <image
+                        class="icon icon-xs"
+                        src="/content/dam/aia/icons/navigation/agents-nav.png"
+                        alt="undefined"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xlink:href=""
+                      ></image>
+                    </g>
+                  </svg>
+
+                  <span>Help &amp; Support</span>
+                </a>
+                <a class="dropdown-toggle pull-right" data-toggle="dropdown">
+                  <svg
+                    class="icon icon-xs hide-on-fallback pull-right closed-show"
+                    role="img"
+                  >
+                    <g>
+                      <use
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        data-savepage-href="/content/dam/aia/icons/icons.svg#open-2ndg"
+                        href="#open-2ndg"
+                      ></use>
+                      <!--savepage-symbol-insert-->
+                      <symbol id="open-2ndg" viewBox="0 0 64 64">
+                        <path
+                          fill="#b3b1a8"
+                          d="M32 36.667L14.72 19.334l-4.053 4L32 44.667l21.333-21.333-4.053-4z"
+                        ></path>
+                      </symbol>
+                      <image
+                        class="icon icon-xs pull-right closed-show"
+                        src="/content/dam/aia/icons/secondary/open-2ndg.png"
+                        alt="undefined"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xlink:href=""
+                      ></image>
+                    </g>
+                  </svg>
+
+                  <svg
+                    class="icon icon-xs hide-on-fallback pull-right closed-hide"
+                    role="img"
+                  >
+                    <g>
+                      <use
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        data-savepage-href="/content/dam/aia/icons/icons.svg#close-2ndg"
+                        href="#close-2ndg"
+                      ></use>
+                      <!--savepage-symbol-insert-->
+                      <symbol id="close-2ndg" viewBox="0 0 64 64">
+                        <path
+                          fill="#b3b1a8"
+                          d="M32 27.333l17.28 17.333 4.053-4L32 19.333 10.667 40.666l4.053 4z"
+                        ></path>
+                      </symbol>
+                      <image
+                        class="icon icon-xs pull-right closed-hide"
+                        src="/content/dam/aia/icons/secondary/close-2ndg.png"
+                        alt="undefined"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xlink:href=""
+                      ></image>
+                    </g>
+                  </svg>
+                </a>
+              </div>
+              <ul
+                class="dropdown-menu navmenu-nav navmenu-dropdown-menu"
+                role="menu"
+              >
+                <li>
+                  <a class="h6 b5" href="/en/help-support/contact-us.html"
+                    >Contact Us</a
+                  >
+                </li>
+
+                <li>
+                  <a class="h6 b5" href="/en/help-support/payez.html"
+                    >ONLINE PAYMENT WITH AIA PAY EZ</a
+                  >
+                </li>
+
+                <li>
+                  <a
+                    class="h6 b5"
+                    href="/en/help-support/healthshieldsupport.html"
+                    >AIA HealthShield Support</a
+                  >
+                </li>
+
+                <li>
+                  <a
+                    class="h6 b5"
+                    href="/en/help-support/market-conduct-complaints.html"
+                    >Lodge a Complaint</a
+                  >
+                </li>
+
+                <li>
+                  <a class="h6 b5" href="/en/help-support/faq.html">FAQs</a>
+                </li>
+
+                <li>
+                  <a class="h6 b5" href="/en/help-support/form-library.html"
+                    >Form Library</a
+                  >
+                </li>
+
+                <li>
+                  <a class="h6 b5" href="/en/help-support/making-a-claim.html"
+                    >Submit a Claim</a
+                  >
+                </li>
+
+                <li>
+                  <a
+                    class="h6 b5"
+                    href="/en/help-support/notice-to-aia-policyholders.html"
+                    >Notices To AIA Policyholders</a
+                  >
+                </li>
+
+                <li>
+                  <a
+                    class="h6 b5"
+                    href="/en/help-support/funds-information.html"
+                    >AIA Funds Information</a
+                  >
+                </li>
+
+                <li>
+                  <a
+                    class="h6 b5"
+                    href="/en/help-support/aia-funds-reports.html"
+                    >AIA Annual Fund Reports</a
+                  >
+                </li>
+
+                <li>
+                  <a
+                    class="h6 b5"
+                    href="/en/help-support/aia-par-fund-commentary.html"
+                    >AIA's Participating Fund Commentaries</a
+                  >
+                </li>
+
+                <li>
+                  <a class="h6 b5" href="/en/help-support/guides.html"
+                    >Consumer Guides</a
+                  >
+                </li>
+              </ul>
+            </li>
+
+            <li class="dropdown myaia-mobile-section">
+              <div class="mobile-firstlevel">
+                <a class="" href="/en/my-aia.html">
+                  <svg class="icon icon-xs hide-on-fallback" role="img">
+                    <g>
+                      <use
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        data-savepage-href="/content/dam/aia/icons/icons.svg#myinsurance-menu"
+                        href="#myinsurance-menu"
+                      ></use>
+                      <!--savepage-symbol-insert-->
+                      <symbol id="myinsurance-menu" viewBox="0 0 64 64">
+                        <path
+                          fill="#FFF"
+                          d="M9.547 11.547V32.88c0 14.293 21.333 21.333 21.333 21.333s21.333-6.747 21.333-21.333V11.547H9.546z"
+                        ></path>
+                        <path
+                          fill="#B3B1A8"
+                          d="M30.88 30.213c-3.173 0-10.667 4.827-10.667 8v5.333h21.333v-5.333c0-3.173-7.493-8-10.667-8zM30.88 30.213c-4.427 0-8-3.573-8-8s3.573-8 8-8 8 3.573 8 8-3.573 8-8 8z"
+                        ></path>
+                      </symbol>
+                      <image
+                        class="icon icon-xs"
+                        src="/content/dam/aia/icons/menu/myinsurance-menu.png"
+                        alt="undefined"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xlink:href=""
+                      ></image>
+                    </g>
+                  </svg>
+
+                  <span>My AIA</span>
+                </a>
+                <a class="dropdown-toggle pull-right" data-toggle="dropdown">
+                  <svg
+                    class="icon icon-xs hide-on-fallback pull-right closed-show"
+                    role="img"
+                  >
+                    <g>
+                      <use
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        data-savepage-href="/content/dam/aia/icons/icons.svg#open-2ndg"
+                        href="#open-2ndg"
+                      ></use>
+                      <!--savepage-symbol-insert-->
+                      <symbol id="open-2ndg" viewBox="0 0 64 64">
+                        <path
+                          fill="#b3b1a8"
+                          d="M32 36.667L14.72 19.334l-4.053 4L32 44.667l21.333-21.333-4.053-4z"
+                        ></path>
+                      </symbol>
+                      <image
+                        class="icon icon-xs pull-right closed-show"
+                        src="/content/dam/aia/icons/secondary/open-2ndg.png"
+                        alt="undefined"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xlink:href=""
+                      ></image>
+                    </g>
+                  </svg>
+
+                  <svg
+                    class="icon icon-xs hide-on-fallback pull-right closed-hide"
+                    role="img"
+                  >
+                    <g>
+                      <use
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        data-savepage-href="/content/dam/aia/icons/icons.svg#close-2ndg"
+                        href="#close-2ndg"
+                      ></use>
+                      <!--savepage-symbol-insert-->
+                      <symbol id="close-2ndg" viewBox="0 0 64 64">
+                        <path
+                          fill="#b3b1a8"
+                          d="M32 27.333l17.28 17.333 4.053-4L32 19.333 10.667 40.666l4.053 4z"
+                        ></path>
+                      </symbol>
+                      <image
+                        class="icon icon-xs pull-right closed-hide"
+                        src="/content/dam/aia/icons/secondary/close-2ndg.png"
+                        alt="undefined"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xlink:href=""
+                      ></image>
+                    </g>
+                  </svg>
+                </a>
+              </div>
+              <ul
+                class="dropdown-menu navmenu-nav navmenu-dropdown-menu"
+                role="menu"
+              >
+                <li>
+                  <a
+                    class="h6 b5"
+                    href="https://myaia.aia.com.sg"
+                    target="_blank"
+                    >My AIA SG</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="h6 b5"
+                    href="https://myaia.aia.com.sg/en/my-aia/login.html"
+                    target="_self"
+                    >My Rewards</a
+                  >
+                </li>
+                <li>
+                  <a class="h6 b5" href="/en/aia-altitude.html" target="_self"
+                    >AIA Altitude</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="h6 b5"
+                    href="https://myaia.aia.com.sg/en/myaia-payez/login.html"
+                    target="_blank"
+                    >Make Payment Online</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="h6 b5"
+                    href="https://claimez.aia.com.sg/clmcorp"
+                    target="_self"
+                    >Submit a Claim</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="h6 b5"
+                    href="https://claimez.aia.com.sg/corp/"
+                    target="_self"
+                    >Request HealthShield Pre-Authorisation</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="h6 b5"
+                    href="https://www2.aia.com.sg/common/AgtLogin/FormsLogin.asp"
+                    target="_blank"
+                    >FSC Access</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="h6 b5"
+                    href="https://www2.aia.com.sg/common/BankLogin/BankLogin.asp"
+                    target="_blank"
+                    >Bank Partner Access</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="h6 b5"
+                    href="https://www2.aia.com.sg/common/FALogin/FALogin.asp"
+                    target="_blank"
+                    >FA Broker Partner Access</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="h6 b5"
+                    href="https://eben.aia.com.sg/en/my-aia/login.html"
+                    target="_blank"
+                    >eBenefits</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+          <ul class="nav promomenu-nav">
+            <li>
+              <a href="https://myaia.aia.com.sg/en/vitality/home.html">
+                <div class="h5 w">AIA Vitality</div>
+                <div class="b5 bt5">Visit the AIA Vitality website</div>
+              </a>
+            </li>
+
+            <li>
+              <a href="/en/aia-financial-resource-hub.html">
+                <div class="h5 w">YOUR FINANCIAL NEEDS MATTER</div>
+                <div class="b5 bt5">
+                  Explore our financial calculators and resources for your long
+                  term and short term goals at different life stages.
+                </div>
+              </a>
+            </li>
+
+            <li>
+              <a href="/en/our-products/recent-promotions.html">
+                <div class="h5 w">Recent Promotions</div>
+                <div class="b5 bt5">
+                  Find out more about our latest campaigns and promotions
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="navbar navbar-default navbar-fixed" id="nav">
+          <div class="navbar-slim">
+            <div class="navbar-title-slim">AIA</div>
+          </div>
+
+          <div class="navbar-one">
+            <button
+              type="button"
+              class="navbar-btn hide-sd-up"
+              data-toggle="offcanvas"
+              data-target=".navmenu"
+              data-canvas="body"
+            >
+              <svg class="icon icon-xs hide-on-fallback" role="img">
+                <g>
+                  <use
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    data-savepage-href="/content/dam/aia/icons/icons.svg#menu-nav"
+                    href="#menu-nav"
+                  ></use>
+                  <!--savepage-symbol-insert-->
+                  <symbol id="menu-nav" viewBox="0 0 64 64">
+                    <path
+                      fill="#fff"
+                      d="M10.667 15.333h42.667v5.333H10.667v-5.333zM10.667 28.667h42.667V34H10.667v-5.333zM10.667 42h26.667v5.333H10.667V42z"
+                    ></path>
+                  </symbol>
+                  <image
+                    class="icon icon-xs"
+                    src="/content/dam/aia/icons/navigation/menu-nav.png"
+                    alt="undefined"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xlink:href=""
+                  ></image>
+                </g>
+              </svg>
+            </button>
+            <a class="navbar-brand" href="/en/index.html" tabindex="99">
+              <svg
+                title="AIA Logo"
+                class="icon icon-s hide-on-fallback visible-xs-inline-block"
+                role="img"
+                alt="AIA Logo"
+              >
+                <g>
+                  <title>AIA Logo</title>
+                  <use
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xlink:href="img\icons.svg#aiawhite-logo"
+                  ></use>
+                  <image
+                    class="icon icon-s visible-xs-inline-block"
+                    src="img\aiawhite-logo.png"
+                    alt="AIA Logo"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xlink:href=""
+                  ></image>
+                </g>
+              </svg>
+
+              <img
+                class="navbar-brand-img hidden-xs"
+                src="img\aiawhite-logo.png"
+                alt="AIA Logo"
+              />
+            </a>
+
+            <ul class="nav navbar-nav" data-user-menu="individual">
+              <li class="dropdown">
+                <a
+                  href="/en/our-products.html"
+                  class="dropdown-toggle h6"
+                  data-hover="dropdown"
+                  data-delay="100"
+                  data-hover-delay="300"
+                  style="width: 100px"
+                  tabindex="100"
+                  aria-expanded="false"
+                >
+                  Our Products
+                </a>
+              </li>
+
+              <li class="dropdown">
+                <a
+                  href="/en/life-matters.html"
+                  class="dropdown-toggle h6"
+                  data-hover="dropdown"
+                  data-delay="100"
+                  data-hover-delay="300"
+                  style="width: 100px"
+                  tabindex="200"
+                  aria-expanded="false"
+                >
+                  Life Matters
+                </a>
+              </li>
+
+              <li class="dropdown">
+                <a
+                  href="about-aia.html"
+                  class="dropdown-toggle h6"
+                  data-hover="dropdown"
+                  data-delay="100"
+                  data-hover-delay="300"
+                  style="width: 100px"
+                  tabindex="300"
+                  aria-expanded="false"
+                >
+                  About AIA
+                </a>
+              </li>
+
+              <li class="dropdown">
+                <a
+                  href="/en/aia-vitality.html"
+                  class="dropdown-toggle h6"
+                  data-hover="dropdown"
+                  data-delay="100"
+                  data-hover-delay="300"
+                  style="width: 100px"
+                  tabindex="400"
+                  aria-expanded="false"
+                >
+                  AIA Vitality
+                </a>
+              </li>
+
+              <li class="dropdown">
+                <a
+                  href="/en/help-support.html"
+                  class="dropdown-toggle h6"
+                  data-hover="dropdown"
+                  data-delay="100"
+                  data-hover-delay="300"
+                  style="width: 100px"
+                  tabindex="500"
+                  aria-expanded="false"
+                >
+                  Help &amp; Support
+                </a>
+              </li>
+
+              <li class="dropdown">
+                <a
+                  href="/en/my-aia.html"
+                  tabindex="9600"
+                  class="dropdown-toggle h6"
+                  data-hover="dropdown"
+                  data-delay="100"
+                  data-hover-delay="300"
+                  style="width: 100px"
+                  aria-expanded="false"
+                >
+                  My AIA
+                </a>
+              </li>
+              <li class="dropdown">
+                <a
+                  href="to-do.html"
+                  class="dropdown-toggle h6"
+                  data-hover="dropdown"
+                  data-delay="100"
+                  data-hover-delay="300"
+                  style="width: 100px"
+                  tabindex="100"
+                  aria-expanded="false"
+                >
+                  To-do
+                </a>
+              </li>
+              <li class="dropdown">
+                <a
+                  href="list-to-do.html"
+                  class="dropdown-toggle h6"
+                  data-hover="dropdown"
+                  data-delay="100"
+                  data-hover-delay="300"
+                  style="width: 100px"
+                  tabindex="100"
+                  aria-expanded="false"
+                >
+                  List To-Do
+                </a>
+              </li>
+            </ul>
+            <ul class="nav navbar-tools pull-right">
+              <li
+                class="dropdown navbar-search-btn hidden-below-sd"
+                tabindex="9800"
+              >
+                <div class="dropdown-toggle" data-toggle="dropdown">
+                  <div class="navbar-tool-label">
+                    <svg
+                      class="icon-xs hide-on-fallback"
+                      role="img"
+                      title="icon-search-nav"
+                    >
+                      <use
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        data-savepage-href="/content/dam/aia/icons/icons.svg#search-nav"
+                        href="#search-nav"
+                      ></use>
+                      <!--savepage-symbol-insert-->
+                      <symbol id="search-nav" viewBox="0 0 64 64">
+                        <path
+                          fill="#fff"
+                          d="M28.907 47.12c-10.053 0-18.24-8.16-18.24-18.213s8.187-18.24 18.24-18.24 18.24 8.187 18.24 18.24S38.96 47.12 28.907 47.12zm0-31.067c-7.093 0-12.853 5.76-12.853 12.853s5.76 12.853 12.853 12.853 12.853-5.76 12.853-12.853-5.787-12.853-12.853-12.853zM43.587 38.075l9.749 9.749L48 53.16l-9.749-9.749 5.336-5.336z"
+                        ></path>
+                      </symbol>
+                      <image
+                        class="icon icon-xs"
+                        src="/content/dam/aia/icons/navigation/search-nav.png"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        xlink:href=""
+                      ></image>
+                    </svg>
+                  </div>
+                </div>
+              </li>
+
+              <li class="dropdown" tabindex="9900" data-contact="">
+                <div class="dropdown-toggle" data-toggle="dropdown">
+                  <div class="navbar-tool-label">
+                    <svg
+                      title="Contact Us"
+                      class="icon icon-xs hide-on-fallback"
+                      role="img"
+                      alt="Contact Us"
+                    >
+                      <g>
+                        <title>Contact Us</title>
+                        <use
+                          xmlns:xlink="http://www.w3.org/1999/xlink"
+                          data-savepage-href="/content/dam/aia/icons/icons.svg#contact-nav"
+                          href="#contact-nav"
+                        ></use>
+                        <!--savepage-symbol-insert-->
+                        <symbol id="contact-nav" viewBox="0 0 64 64">
+                          <path
+                            fill="#fff"
+                            d="M42.693 34.16l-7.707 7.707-13.573-13.573 7.707-7.707L18.373 9.84l-3.493 3.493c-5.44 5.44-5.44 14.293 0 19.733l16.587 16.427c5.467 4.32 13.44 3.973 18.507-1.093l3.493-3.493L42.694 34.16z"
+                          ></path>
+                        </symbol>
+                        <image
+                          class="icon icon-xs"
+                          src="/content/dam/aia/icons/navigation/contact-nav.png"
+                          alt="Contact Us"
+                          xmlns:xlink="http://www.w3.org/1999/xlink"
+                          xlink:href=""
+                        ></image>
+                      </g>
+                    </svg>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="navbar-fixed-spacer"></div>
+      </div>
+    </div>
+    <div>
+      <h1>List To-Do</h1>
+    </div>
+    <div id="tasks"></div>
+  </body>
+</html>
