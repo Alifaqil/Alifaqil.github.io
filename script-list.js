@@ -38,7 +38,7 @@ function listmaker(stat = "", sdone = "") {
               </button>
           </div>
       `;
-    } else if (stat != "") {
+    } else if (stat != "" && sdone == "") {
       if (parsedobj.status == stat) {
         let dates = new Date(parsedobj.dateTime);
         let statsdn = "";
@@ -75,7 +75,7 @@ function listmaker(stat = "", sdone = "") {
           </div>
       `;
       }
-    } else if (sdone != "") {
+    } else if (sdone != "" && stat == "") {
       if (parsedobj.done == sdone) {
         let dates = new Date(parsedobj.dateTime);
         let statsdn = "";
@@ -112,16 +112,15 @@ function listmaker(stat = "", sdone = "") {
                   </div>
               `;
       }
-    } else {
-      if (parsedobj.status == stat && parsedobj.done == sdone) {
-        let dates = new Date(parsedobj.dateTime);
-        let statsdn = "";
-        if (parsedobj.done == "Done") {
-          statsdn = "dones";
-        } else {
-          statsdn = "ndones";
-        }
-        document.querySelector("#tasks").innerHTML += `
+    } else if (parsedobj.status == stat && parsedobj.done == sdone) {
+      let dates = new Date(parsedobj.dateTime);
+      let statsdn = "";
+      if (parsedobj.done == "Done") {
+        statsdn = "dones";
+      } else {
+        statsdn = "ndones";
+      }
+      document.querySelector("#tasks").innerHTML += `
                   <div class="task">
                       <p>
                           ${dates}
@@ -148,7 +147,6 @@ function listmaker(stat = "", sdone = "") {
                       </button>
                   </div>
               `;
-      }
     }
   });
 }
