@@ -1,10 +1,11 @@
 // localStorage.clear();
 class toDo {
-  constructor(dateTime, status, title, description) {
+  constructor(dateTime, status, title, description, done) {
     this.dateTime = dateTime;
     this.status = status;
     this.title = title;
     this.description = description;
+    this.done = done;
   }
 }
 
@@ -29,7 +30,7 @@ btn.addEventListener("click", (event) => {
     alert("Please Fill the Title");
     return false;
   } else {
-    const list = new toDo(dt, st, tt, desc);
+    const list = new toDo(dt, st, tt, desc, "Not Done");
     const jsonobj = JSON.stringify(list);
     localStorage.setItem(id, jsonobj);
     document.querySelector("#ftd").reset();

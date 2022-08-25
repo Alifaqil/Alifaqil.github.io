@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
@@ -10,6 +10,7 @@
     <style>
       h1 {
         margin: 0 20px;
+        margin-bottom: 10px;
         font-weight: 400;
         color: #d31145;
       }
@@ -18,7 +19,7 @@
         width: 100%;
         position: relative;
         background-color: #ffffff;
-        padding: 30px 20px;
+        padding: 20px 20px;
         margin-top: 10px;
       }
 
@@ -39,7 +40,41 @@
       p {
         margin: 5px 0;
       }
+      .filter {
+        border-radius: 12px;
+        border: none;
+        background-color: #d31145;
+        color: #ffffff;
+        float: right;
+        font-size: 16px;
+        padding: 6px 12px;
+      }
       .delete {
+        border-radius: 12px;
+        margin: 0 5px;
+        float: right;
+        background-color: #d31145;
+        border: none;
+        color: #ffffff;
+        font-size: 16px;
+        padding: 8px 18px;
+        border: 2px solid #d31145;
+      }
+      .dones {
+        border-radius: 12px;
+        border: none;
+        background-color: #4caf50;
+        color: #ffffff;
+        align-items: center;
+      }
+      .ndones {
+        border-radius: 12px;
+        border: none;
+        background-color: #d31145;
+        color: #ffffff;
+        align-items: center;
+      }
+      .ndone {
         border-radius: 12px;
         float: right;
         background-color: #4caf50;
@@ -49,10 +84,15 @@
         padding: 8px 18px;
         border: 2px solid #4caf50;
       }
-      .delete:hover {
+      .ndone:hover {
         background: #fff;
         color: #4caf50;
         border: 2px solid #4caf50;
+      }
+      .delete:hover {
+        background: #fff;
+        color: #d31145;
+        border: 2px solid #d31145;
       }
       .status {
         border-radius: 12px;
@@ -60,6 +100,19 @@
         background-color: #d31145;
         color: #ffffff;
         align-items: center;
+      }
+      .done {
+        border-radius: 12px;
+        border: none;
+        background-color: #d31145;
+        color: #ffffff;
+        align-items: center;
+      }
+      div label {
+        height: inherit;
+      }
+      div select {
+        height: inherit;
       }
     </style>
   </head>
@@ -1374,6 +1427,23 @@
     </div>
     <div>
       <h1>List To-Do</h1>
+    </div>
+    <div class="task" style="width: auto; margin: 5px 20px; padding: 10px 10px">
+      <div style="height: auto">
+        <label>Status</label>
+        <select id="sstatus">
+          <option value="">-</option>
+          <option value="Important">Important</option>
+          <option value="Not Important">Not Important</option>
+        </select>
+        <label>Done/Not Done</label>
+        <select id="sdone">
+          <option value="">-</option>
+          <option value="Done">Done</option>
+          <option value="Not Done">Not Done</option>
+        </select>
+        <button class="filter">Filter</button>
+      </div>
     </div>
     <div id="tasks"></div>
   </body>
