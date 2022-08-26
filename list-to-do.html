@@ -89,6 +89,21 @@
         color: #4caf50;
         border: 2px solid #4caf50;
       }
+      .nndone {
+        border-radius: 12px;
+        float: right;
+        background-color: #d31145;
+        border: none;
+        color: #ffffff;
+        font-size: 16px;
+        padding: 8px 18px;
+        border: 2px solid #d31145;
+      }
+      .nndone:hover {
+        background: #fff;
+        color: #d31145;
+        border: 2px solid #d31145;
+      }
       .delete:hover {
         background: #fff;
         color: #d31145;
@@ -1432,13 +1447,13 @@
       <div style="height: auto">
         <label>Status</label>
         <select id="sstatus">
-          <option value="">-</option>
+          <option value="">All</option>
           <option value="Important">Important</option>
           <option value="Not Important">Not Important</option>
         </select>
         <label>Done/Not Done</label>
         <select id="sdone">
-          <option value="">-</option>
+          <option value="">All</option>
           <option value="Done">Done</option>
           <option value="Not Done">Not Done</option>
         </select>
