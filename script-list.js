@@ -185,14 +185,19 @@ Object.keys(localStorage).forEach((key) => {
           </div>
       `;
 });
-const filter = document.querySelector(".filter");
-filter.addEventListener("click", (event) => {
-  const stat = document.querySelector("#sstatus").value;
-  const sdone = document.querySelector("#sdone").value;
+
+const stat = document.querySelector("#sstatus");
+const sdone = document.querySelector("#sdone");
+stat.onchange = () => {
   document.querySelector("#tasks").innerHTML = "";
   console.log(stat, sdone);
-  listmaker(stat, sdone);
-});
+  listmaker(stat.value, sdone.value);
+};
+sdone.onchange = () => {
+  document.querySelector("#tasks").innerHTML = "";
+  console.log(stat, sdone);
+  listmaker(stat.value, sdone.value);
+};
 
 var dbtn = document.querySelectorAll(".ndone");
 dbtn.forEach((element) => {
